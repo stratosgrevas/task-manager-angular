@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+// 
+// importando arquivos do projeto
+// 
+import { Task } from './shared/task.model';
+
 // const TASKS: Array<number> = [];
 // const TASKS_2: string[] = [];
-const TASKS: Array<any> = [
+const TASKS: Array<Task> = [
 	{ id: 1, title: 'Fazer tarefa 1' },
 	{ id: 2, title: 'Fazer tarefa 2' },
 	{ id: 3, title: 'Fazer tarefa 3' },
