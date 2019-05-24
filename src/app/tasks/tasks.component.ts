@@ -17,7 +17,7 @@ const TASKS: Array<Task> = [
 	{ id: 7, title: 'Fazer tarefa 7' },
 	{ id: 8, title: 'Fazer tarefa 8' },
 	{ id: 9, title: 'Fazer tarefa 9' },
-	{ id: 10, title: 'Fazer tarefa 10' },
+	{ id: 10, title: 'Fazer tarefa 10' }
 ];
 
 @Component({
@@ -27,12 +27,23 @@ const TASKS: Array<Task> = [
 })
 export class TasksComponent implements OnInit {
 	public tasks;
+	public selectedTask = Task;
 
   constructor() { }
 
   ngOnInit() {
   	this.tasks = TASKS;
-  	console.log(this.tasks);
+  	// console.log(this.tasks);
+  }
+
+  // outra forma de declarar uma função mais detalhadamente
+  //
+  // public onSelect(task: Task): void {
+  // 	this.selectedTask = task;
+  // }
+
+  public onSelect(task){
+  	this.selectedTask = task;
   }
 
 }
