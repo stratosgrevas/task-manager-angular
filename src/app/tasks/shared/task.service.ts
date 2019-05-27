@@ -20,8 +20,42 @@ const TASKS: Array<Task> = [
 @Injectable()
 
 export class TaskService{
-	public getTasks(): Array<Task>{
-		return TASKS;
+
+	/**
+	 * Trabalhando sem Promises
+	 * promises = execução em segundo plano
+	 * 
+			public getTasks(): Array<Task>{
+				return TASKS;
+			}
+	*/
+
+	/**
+	 * Trabalhando com Promises
+	 * promises = execução em segund plano.
+	 */
+	public getTasks(): Promise<Task[]>{
+		let promise = new Promise((resolve, reject) => {
+			if( TASKS.length > 0 ){
+				
+				/**
+				 * Exemplo com TimeOut (delay):
+				 * 
+					setTimeout(function(){
+						resolve(TASKS);
+					}, 5000); // 5000 = 5 segundos.
+					
+				*/
+			
+				resolve(TASKS);
+
+			}else{
+				let error_msg = "Não há tarefas !";
+				reject(error_msg)
+			}
+		})
+
+		return promise;
 	}
 
 }
