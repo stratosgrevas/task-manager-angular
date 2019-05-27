@@ -4,36 +4,56 @@ import { Component, OnInit } from '@angular/core';
 // importando arquivos do projeto
 // 
 import { Task } from './shared/task.model';
+import { TaskService } from './shared/task.service';
 
-// const TASKS: Array<number> = [];
-// const TASKS_2: string[] = [];
-const TASKS: Array<Task> = [
-	{ id: 1, title: 'Fazer tarefa 1' },
-	{ id: 2, title: 'Fazer tarefa 2' },
-	{ id: 3, title: 'Fazer tarefa 3' },
-	{ id: 4, title: 'Fazer tarefa 4' },
-	{ id: 5, title: 'Fazer tarefa 5' },
-	{ id: 6, title: 'Fazer tarefa 6' },
-	{ id: 7, title: 'Fazer tarefa 7' },
-	{ id: 8, title: 'Fazer tarefa 8' },
-	{ id: 9, title: 'Fazer tarefa 9' },
-	{ id: 10, title: 'Fazer tarefa 10' }
-];
+/**
+ * Exemplo de Declaração de Constantes:
+ * 
+    const TASKS: Array<number> = [];
+    const TASKS_2: string[] = [];
+*/
+
+/**
+ * 
+ * Exemplos de Providers:
+ * 
+    providers: [
+      { provide: TaskService, useClass: TaskService },
+      { provide: Notifier, useClass: EmailNotifier },
+      { provide: NotifierSMS, useClass: SMSNotifier }
+    ]
+*/
 
 @Component({
   selector: 'tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css']
+  styleUrls: ['./tasks.component.css'],
+  providers: [ TaskService ]
 })
 export class TasksComponent implements OnInit {
-	public tasks;
-	public selectedTask = Task;
+	public tasks: Array<Task>;
+	public selectedTask: Task;
 
-  constructor() { }
+/**
+ * 
+ * Declaração de variáveis e inicializar no Construtor:
+
+    private taskService: TaskService;
+
+    constructor(taskService: TaskService) {
+      this.taskService = taskService;
+    }
+
+*/
+
+  /**
+   * Declaração de variáveis diretamente no Construtor:
+   */
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
-  	this.tasks = TASKS;
   	// console.log(this.tasks);
+    this.tasks = this.taskService.getTasks();
   }
 
   // outra forma de declarar uma função mais detalhadamente
