@@ -27,8 +27,7 @@ import { TaskService } from './shared/task.service';
 @Component({
   selector: 'tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css'],
-  providers: [ TaskService ]
+  styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
 	public tasks: Array<Task>;
