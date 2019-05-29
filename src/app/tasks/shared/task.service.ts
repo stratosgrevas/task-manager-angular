@@ -1,7 +1,8 @@
-/* Carregar componentes do angular */
+/* angular imports */
+import { Http } from '@angular/http';
 import { Injectable } from "@angular/core";
 
-/* Carregar componentes da aplicação */
+/* components imports */
 import { Task } from './task.model';
 
 const TASKS: Array<Task> = [
@@ -20,6 +21,8 @@ const TASKS: Array<Task> = [
 @Injectable()
 
 export class TaskService{
+
+	public constructor(private http: Http){}
 
 	/**
 	 * Trabalhando sem Promises
