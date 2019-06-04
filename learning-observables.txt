@@ -1,0 +1,33 @@
+Aprendendo um pouco sobre os Observables e Observers
+
+EXEMPLO: YOUTUBE
+
+	CANAL (observado/observable)
+		- listaInscritos[]
+
+		- receberInscricao(inscrito)
+		- removerInscricao(inscrito)
+		- notificaInscritos(listaInscritos[])
+			inscrito.receberNotificacao(novoVideo)
+
+  INSCRITOS (observador/observer)
+    - receberNotificacao(novoVideo)
+
+=================================================================
+
+Como isso é implementado no ANGULAR (RXJS - ReactiveX JS)
+
+	OBSERVABLE
+		- subscribe(observer)
+		- unsubscribe(observer)
+		- notify
+			- observer.next(novoDado)
+			- observer.error(erro)
+			- observer.complete()
+
+	OBSERVER
+		- next(novoDado) => método mais importante !!!
+		- error(erro) *
+		- complete() *
+
+		* podem nunca ser chamados
