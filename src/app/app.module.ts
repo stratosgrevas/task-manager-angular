@@ -21,6 +21,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { InMemoryWebApiModule } from "angular-in-memory-web-api";
 import { InMemoryTaskDataService } from "./in-memory-task-data.service";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,7 @@ import { InMemoryTaskDataService } from "./in-memory-task-data.service";
     HttpModule,
     AppRoutingModule,
     InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
-    /* InMemoryWebApiModule.forRoot(InMemoryTaskDataService, { apiBase: "myApi" }) */
+    /* InMemoryWebApiModule.forRoot( InMemoryTaskDataService, { apiBase: "site" } ) */
   ],
   providers: [
     TaskService
