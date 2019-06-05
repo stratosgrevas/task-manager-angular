@@ -52,12 +52,10 @@ export class TasksComponent implements OnInit {
 
   ngOnInit() {
     this.taskService.getTasks()
-    .then((tasks) => {
-      console.log("Sucesso !!!");
-      console.log(tasks);
-      this.tasks = tasks;
-    })
-    .catch((error_msg) => alert(error_msg));
+      .subscribe(
+        tasks => this.tasks = tasks,
+        error => alert("Ocorreu um erro no servidor, tente mais tarde !")
+      )
   }
 
   // outra forma de declarar uma função mais detalhadamente
