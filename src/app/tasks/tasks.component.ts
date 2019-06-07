@@ -31,7 +31,10 @@ import { TaskService } from './shared/task.service';
 })
 export class TasksComponent implements OnInit {
 	public tasks: Array<Task>;
-	public selectedTask: Task;
+  public newTask: Task;
+
+  // não está mais sendo usado
+	// public selectedTask: Task;
 
 /**
  * 
@@ -48,14 +51,35 @@ export class TasksComponent implements OnInit {
   /**
    * Declaração de variáveis diretamente no Construtor:
    */
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService){
+    this.newTask = new Task(null, '');
+  }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.taskService.getTasks()
       .subscribe(
         tasks => this.tasks = tasks,
         error => alert("Ocorreu um erro no servidor, tente mais tarde !")
       )
+  }
+
+  public createTask(){
+    this.newTask.title = this.newTask.title.trim();
+
+    if(!this.newTask.title){
+      alert("A tarefa deve ter um título !");
+    }else{
+      this.taskService.createTask(this.newTask)
+        .subscribe(
+          (task) => {
+            /* atualizando a lista da pagina com a nova tarefa */
+            this.tasks.push(task);
+            /* limpando o formulário */
+            this.newTask = new Task(null, '');
+          },
+          () => alert("Ocorreu um erro no servidor, tente mais tarde !")
+        )
+    }
   }
 
   // outra forma de declarar uma função mais detalhadamente
@@ -64,8 +88,9 @@ export class TasksComponent implements OnInit {
   // 	this.selectedTask = task;
   // }
 
-  public onSelect(task){
-  	this.selectedTask = task;
-  }
+  // não está mais sendo usado
+  // public onSelect(task){
+  // 	this.selectedTask = task;
+  // }
 
 }
