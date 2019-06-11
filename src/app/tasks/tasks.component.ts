@@ -56,7 +56,7 @@ export class TasksComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.taskService.getTasks()
+    this.taskService.getAll()
       .subscribe(
         tasks => this.tasks = tasks,
         error => alert("Ocorreu um erro no servidor, tente mais tarde !")
@@ -69,7 +69,7 @@ export class TasksComponent implements OnInit {
     if(!this.newTask.title){
       alert("A tarefa deve ter um título !");
     }else{
-      this.taskService.createTask(this.newTask)
+      this.taskService.create(this.newTask)
         .subscribe(
           (task) => {
             /* atualizando a lista da pagina com a nova tarefa */
@@ -87,7 +87,7 @@ export class TasksComponent implements OnInit {
     // console.log(confirmed);
 
     if( confirm(`Deseja realmente excluir a tarefa "${task.title}"?`) ){
-      this.taskService.deleteTask(task.id)      
+      this.taskService.delete(task.id)      
         .subscribe(
           () => this.tasks = this.tasks.filter(t => t !== task),
           () => alert("Ocorreu um erro no servidor, tente mais tarde !")
