@@ -1,5 +1,5 @@
 /* Carregar componentes do angular */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { TaskService } from '../shared/task.service';
   templateUrl: './task-detail.component.html'
 })
 
-export class TaskDetailComponent implements OnInit{
+export class TaskDetailComponent implements OnInit, AfterViewInit{
 	public task: Task;
 	public taskDoneOptions: Array<any> = [
 		{ value: false, text: "Pendente"},
@@ -44,6 +44,10 @@ export class TaskDetailComponent implements OnInit{
 				task => this.task = task,
 				error => alert("Ocorreu um erro no servidor, tente mais tarde !")
 			)
+	}
+
+	public ngAfterViewInit(){
+		// $("#exemplo").fadeOut(9999);
 	}
 
 	public goBack(){
