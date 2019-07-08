@@ -58,7 +58,7 @@ export class TasksComponent implements OnInit {
   public ngOnInit() {
     this.taskService.getAll()
       .subscribe(
-        tasks => this.tasks = tasks,
+        tasks => this.tasks = tasks.sort( (a,b) => b.id - a.id ),
         error => alert("Ocorreu um erro no servidor, tente mais tarde !")
       )
   }
@@ -73,7 +73,7 @@ export class TasksComponent implements OnInit {
         .subscribe(
           (task) => {
             /* atualizando a lista da pagina com a nova tarefa */
-            this.tasks.push(task);
+            this.tasks.unshift(task);
             /* limpando o formulário */
             this.newTask = new Task(null, '');
           },
