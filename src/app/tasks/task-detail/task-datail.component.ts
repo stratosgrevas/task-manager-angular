@@ -47,6 +47,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 			deadline: [null],
 			done: [null],
 			description: [null],
+			user: this.formBuilder.group({
+				name: ["João Carlos"],
+				email: ["joao@carlos.com"]
+			})
 		})
 	}
 
