@@ -2,7 +2,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 /* Carregar componentes da aplicação */
 import { Task } from '../shared/task.model';
@@ -43,9 +43,9 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 		 * inicializando os 4 campos do formulário
 		*/
 		this.reactiveTaskForm = this.formBuilder.group({
-			title: [null],
-			deadline: [null],
-			done: [null],
+			title: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)] ],
+			deadline: [null, Validators.required],
+			done: [null, Validators.required],
 			description: [null],
 		})
 
