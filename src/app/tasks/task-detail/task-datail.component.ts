@@ -10,16 +10,14 @@ import { TaskService } from '../shared/task.service';
 
 @Component({
   selector: 'task-detail',
-  templateUrl: './task-detail.component.html'
+  templateUrl: './task-detail.component.html',
+  styles: [".form-control-feedback{ margin-right: 20px; margin-top: 25px; }"]
 })
 
 export class TaskDetailComponent implements OnInit, AfterViewInit{
 	public reactiveTaskForm: FormGroup;
 	public task: Task;
-	public taskDoneOptions: Array<any> = [
-		{ value: false, text: "Pendente"},
-		{ value: true, text: "Feita"}
-	];
+	public taskDoneOptions: Array<any>;
 
 	public constructor(
 		private taskService: TaskService,
@@ -27,6 +25,12 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 		private location: Location,
 		private formBuilder: FormBuilder
 	){
+
+		this.taskDoneOptions =[
+			{ value: false, text: "Pendente"},
+			{ value: true, text: "Feita"}
+		];
+
 		/**
 		 * FormGroup
 		 * inicializando os 4 campos do formulário
@@ -161,8 +165,38 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 				)
 	}
 
+	/* forms errors methods */
+
+	public fieldClassForErrorOrSuccess(fieldName: string){
+		return {
+			"has-error": this.showFieldError(this.reactiveTaskForm.get(fieldName)),
+			"has-success": this.getField(fieldName).valid
+		}
+	}
+
+	public iconClassForErrorOrSuccess(fieldName: string){
+		return {
+			"glyphicon-remove": this.showFieldError(this.reactiveTaskForm.get(fieldName)),
+			"glyphicon-ok": this.getField(fieldName).valid
+		}
+	}
+
+
+	/**
+	 * Essa função é refatorada e deixa o código mais limpo!
+	 * Porém está acontecendo um erro no es5 na linha 1084.
+	*/
+	// public showFieldError(fieldName: string): boolean{
+	// 	let field = this.getField(fieldName)
+	// 	return field.invalid && ( field.touched || field.dirty )
+	// }
+
 	public showFieldError(field): boolean{
 		return field.invalid && ( field.touched || field.dirty )
+	}
+
+	public getField(fieldName: string){
+		return this.reactiveTaskForm.get(fieldName);
 	}
 
 }
