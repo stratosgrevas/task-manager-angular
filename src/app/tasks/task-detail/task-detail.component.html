@@ -4,34 +4,34 @@
   <div class="row">
 
     <!-- taskTitle -->
-    <div class="form-group col-md-6" has-feedback [ngClass]="fieldClassForErrorOrSuccess('title')">
+    <div class="form-group col-md-6" has-feedback [ngClass]="formUtils.fieldClassForErrorOrSuccess('title')">
         <label for="title" class="control-label">Título</label>
         <input type="text" formControlName="title" id="title" class="form-control">
-        <span class="glyphicon form-control-feedback" [ngClass]="iconClassForErrorOrSuccess('title')"></span>
+        <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('title')"></span>
         
-        <div *ngIf="showFieldError(reactiveTaskForm.get('title'))" class="text-danger">
-          <div *ngIf="getField('title').errors.required">o título é obrigatório</div>
-          <div *ngIf="getField('title').errors.minlength">o título deve ter no mínimo 2 caracteres</div>
-          <div *ngIf="getField('title').errors.maxlength">o título deve ter no máximo 255 caracteres</div>
+        <div *ngIf="formUtils.showFieldError('title')" class="text-danger">
+          <div *ngIf="reactiveTaskForm.get('title').errors.required">o título é obrigatório</div>
+          <div *ngIf="reactiveTaskForm.get('title').errors.minlength">o título deve ter no mínimo 2 caracteres</div>
+          <div *ngIf="reactiveTaskForm.get('title').errors.maxlength">o título deve ter no máximo 255 caracteres</div>
         </div>
     </div>
 
     <!-- taskDeadLine -->
-    <div class="form-group col-md-3" has-feedback [ngClass]="fieldClassForErrorOrSuccess('deadline')">
+    <div class="form-group col-md-3" has-feedback [ngClass]="formUtils.fieldClassForErrorOrSuccess('deadline')">
         <label for="deadline" class="control-label">Prazo de Entrega:</label>
         <input type="text" formControlName="deadline" id="deadline" class="form-control">
-        <span class="glyphicon form-control-feedback" [ngClass]="iconClassForErrorOrSuccess('deadline')"></span>
-        <div *ngIf="showFieldError(reactiveTaskForm.get('deadline'))" class="text-danger">o prazo é obrigatório</div>
+        <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('deadline')"></span>
+        <div *ngIf="formUtils.showFieldError('deadline')" class="text-danger">o prazo é obrigatório</div>
     </div>
 
     <!-- taskDone -->
-    <div class="form-group col-md-3" has-feedback [ngClass]="fieldClassForErrorOrSuccess('done')">
+    <div class="form-group col-md-3" has-feedback [ngClass]="formUtils.fieldClassForErrorOrSuccess('done')">
         <label for="done" class="control-label">Situação:</label>
         <select class="form-control" id="done" formControlName="done">
           <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{ option.text }}</option>
         </select>
-        <span class="glyphicon form-control-feedback" [ngClass]="iconClassForErrorOrSuccess('done')"></span>
-        <div *ngIf="showFieldError(reactiveTaskForm.get('done'))" class="text-danger">situação obrigatória</div>
+        <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('done')"></span>
+        <div *ngIf="formUtils.showFieldError('done')" class="text-danger">situação obrigatória</div>
     </div>
   </div>
 
@@ -60,9 +60,9 @@
   </div> -->
 
   <pre>{{ reactiveTaskForm.value | json }}</pre>
-  <pre>{{ getField("title").errors | json }}</pre>
-  <pre>{{ getField("done").errors | json }}</pre>
-  <pre>{{ getField("deadline").errors | json }}</pre>
+  <pre>{{ formUtils.getField("title").errors | json }}</pre>
+  <pre>{{ formUtils.getField("done").errors | json }}</pre>
+  <pre>{{ formUtils.getField("deadline").errors | json }}</pre>
 
 </form>
 

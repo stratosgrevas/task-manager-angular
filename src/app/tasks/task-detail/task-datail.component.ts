@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 /* Carregar componentes da aplicação */
+import { FormUtils } from "../../shared/form.utils";
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
 
@@ -18,6 +19,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 	public reactiveTaskForm: FormGroup;
 	public task: Task;
 	public taskDoneOptions: Array<any>;
+	public formUtils: FormUtils;
 
 	public constructor(
 		private taskService: TaskService,
@@ -66,6 +68,9 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 		// 		email: ["joao@carlos.com"]
 		// 	})
 		// })
+
+		// utilizando o formUtils
+		this.formUtils = new FormUtils(this.reactiveTaskForm);
 	}
 
 	/**
@@ -163,40 +168,6 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 					() => alert("Tarefa atualizada com sucesso !"),
 					() => alert("Ocorreu um erro no servidor, tente mais tarde !")
 				)
-	}
-
-	/* forms errors methods */
-
-	public fieldClassForErrorOrSuccess(fieldName: string){
-		return {
-			"has-error": this.showFieldError(this.reactiveTaskForm.get(fieldName)),
-			"has-success": this.getField(fieldName).valid
-		}
-	}
-
-	public iconClassForErrorOrSuccess(fieldName: string){
-		return {
-			"glyphicon-remove": this.showFieldError(this.reactiveTaskForm.get(fieldName)),
-			"glyphicon-ok": this.getField(fieldName).valid
-		}
-	}
-
-
-	/**
-	 * Essa função é refatorada e deixa o código mais limpo!
-	 * Porém está acontecendo um erro no es5 na linha 1084.
-	*/
-	// public showFieldError(fieldName: string): boolean{
-	// 	let field = this.getField(fieldName)
-	// 	return field.invalid && ( field.touched || field.dirty )
-	// }
-
-	public showFieldError(field): boolean{
-		return field.invalid && ( field.touched || field.dirty )
-	}
-
-	public getField(fieldName: string){
-		return this.reactiveTaskForm.get(fieldName);
 	}
 
 }

@@ -18,10 +18,17 @@ export class FormUtils {
 		}
 	}
 
+    // essa função deixa o código do component html mais limpo
 	public showFieldError(fieldName: string): boolean{
 		let field = this.getField(fieldName)
 		return field.invalid && ( field.touched || field.dirty )
-	}
+    }
+    
+    // essa função tem o mesmo retorno da função acima, porém
+    // a função acima deixa o código mais limpo!
+    // public showFieldError(field): boolean{
+	// 	return field.invalid && ( field.touched || field.dirty )
+	// }
 
 	public getField(fieldName: string){
 		return this.form.get(fieldName);
