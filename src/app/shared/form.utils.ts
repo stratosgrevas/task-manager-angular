@@ -6,6 +6,7 @@ export class FormUtils {
 
 	public fieldClassForErrorOrSuccess(fieldName: string){
 		return {
+            //"has-error": this.showFieldError(this.reactiveTaskForm.get(fieldName)),
 			"has-error": this.showFieldError(fieldName),
 			"has-success": this.getField(fieldName).valid
 		}
@@ -13,6 +14,7 @@ export class FormUtils {
 
 	public iconClassForErrorOrSuccess(fieldName: string){
 		return {
+            //"glyphicon-remove": this.showFieldError(this.reactiveTaskForm.get(fieldName)),
 			"glyphicon-remove": this.showFieldError(fieldName),
 			"glyphicon-ok": this.getField(fieldName).valid
 		}
