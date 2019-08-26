@@ -5,7 +5,9 @@ import { FormUtils } from "../shared/form.utils";
 
 @Component({
     selector: "sign-in-form",
-    template: "SIGN IN FORM"
+    //template: "MINHA PAGINA" // assim já pode ser testado o link.
+    templateUrl: './sign-in-form.component.html',
+    styles: [".form-control-feedback{ margin-right: 15px; margin-top: 0px; }"]
 })
 
 export class SignInFormComponent{
